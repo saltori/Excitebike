@@ -1,11 +1,7 @@
 #include "SceneTask.h"
 #include "DxLib.h"
-#include "GameBoard.h"
 #include"ImageMng.h"
-#include "Player.h"
-#include "PieceTray.h"
 #include "TitleScene.h"
-#include "OPRT_state.h"
 
 #define SCREEN_SIZE_X 800
 #define SCREEN_SIZE_Y 600
@@ -37,8 +33,6 @@ int SceneTask::Init(void)
 		return -1;	// ＤＸライブラリ初期化処理
 	}
 	SetDrawScreen(DX_SCREEN_BACK);	// エラーが起きたら直ちに終了
-	Sysmouse = std::make_shared<MouseCtl>();
-	Sysmouse->SetOPRT(OPRT_TYPE::MAN);
 	return true;
 }
 
@@ -49,9 +43,8 @@ void SceneTask::GameRun(void)
 	{
 		// マウスを表示状態にする
 		//SetMouseDispFlag(FALSE);
-		Sysmouse->UpDate();
 		//Mouse->UpDate(OPRT_TYPE::CPU);
-		activScene = activScene->Update(std::move(activScene),Sysmouse);
+		activScene = activScene->Update(std::move(activScene));
 	}
 }
 

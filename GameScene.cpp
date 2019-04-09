@@ -12,6 +12,7 @@
 GameScene::GameScene()
 {
 	MovePos = 0;
+	playerList.clear();
 }
 
 
@@ -27,8 +28,8 @@ uniqueBase GameScene::Update(uniqueBase ub)
 {
 	memcpy(keyOld, key, sizeof(keyOld));
 	GetHitKeyStateAll(key);
-	const int roadOffset = 1010;	// 2枚目表示の際のオフセット
-	const int wallOffset = 1150;	// 壁のオフセット
+	const int roadOffset = 1010;	// 2枚目表示の際のｵﾌｾｯﾄ
+	const int wallOffset = 1150;	// 壁のｵﾌｾｯﾄ
 	ClsDrawScreen();
 	DrawBox(0, 0, lpSceneTask.GetScreenSize().x, lpSceneTask.GetScreenSize().y, BACKCOLOR, true);
 	DrawRotaGraph(lpSceneTask.GetScreenSize().x / 2, 547, 1.7, 0, IMAGE_ID("image/engine.png")[0], true);
@@ -36,6 +37,7 @@ uniqueBase GameScene::Update(uniqueBase ub)
 	DrawGraph(-10 + roadOffset + MovePos, ROAD_POS_Y, IMAGE_ID("image/road.png")[0], true);
 	DrawGraph(BACKWALL_POS_X + MovePos, BACKWALL_POS_Y,IMAGE_ID("image/wall.png")[0], true);
 	DrawGraph(BACKWALL_POS_X + wallOffset + MovePos, BACKWALL_POS_Y, IMAGE_ID("image/wall.png")[0], true);
+
 
 	if (key[KEY_INPUT_D])
 	{
@@ -49,4 +51,9 @@ uniqueBase GameScene::Update(uniqueBase ub)
 
 	ScreenFlip();
 	return ub;
+}
+
+void GameScene::MakePlayer(void)
+{
+	playerList.push_back(std::make_shared<Player>(VECTOR2(VECTOR2(100,100))));
 }

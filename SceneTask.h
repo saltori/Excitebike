@@ -31,14 +31,13 @@ public:
 		//std::call_once(initFlag,Create);
 		return *s_Instance;
 	}
-	void GameRun(void);	// この中でゲームのループ
+	void GameRun(void);	// この中でｹﾞｰﾑのﾙｰﾌﾟ
 	VECTOR2 GetScreenSize(void);
-	VECTOR2 GetAvtiveBoardSize(void);
 	void StartPrgTime();	// 計測開始	
 	void EndPrgTime();		// 終了
 	__int64 GetPrgTime();	// 開始から終了
 private:
-	struct GameTaskDeleter // 関数オブジェクト
+	struct GameTaskDeleter // 関数ｵﾌﾞｼﾞｪｸﾄ
 	{
 		void operator()(SceneTask* gameTask) const
 		{
@@ -50,7 +49,6 @@ private:
 	~SceneTask();
 	int (SceneTask::*GtskPtr)(void);
 	int Init(void);
-	int passCnt;	// 連続で何人パスしたか
 	uniqueBase activScene;
 	ArrayTime timePoint;
 };

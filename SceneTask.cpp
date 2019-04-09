@@ -27,7 +27,7 @@ int SceneTask::Init(void)
 {
 	SetWindowText("1701309_ì“c žx");
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);	// ‰æ–Ê»²½ÞÝ’è
-	ChangeWindowMode(true);				// true:window@false:ÌÙ½¸Ø°Ý
+	ChangeWindowMode(true);				// true:window@false:ÌÙ½¸Ø°Ý		
 	if (DxLib_Init() == -1)
 	{
 		return -1;	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
@@ -53,15 +53,6 @@ void SceneTask::GameRun(void)
 VECTOR2 SceneTask::GetScreenSize(void)
 {
 	return VECTOR2(SCREEN_SIZE_X,SCREEN_SIZE_Y);
-}
-
-VECTOR2 SceneTask::GetAvtiveBoardSize(void)
-{
-	if (activScene)
-	{
-		return activScene->GetBoardActivSize();
-	} 
-	return VECTOR2(0, 0);
 }
 
 void SceneTask::StartPrgTime()

@@ -19,6 +19,7 @@ public:
 	virtual ~BaseScene();
 	virtual void Init(void) = 0;
 	virtual uniqueBase Update(uniqueBase ub) = 0;
-	virtual VECTOR2 GetBoardActivSize(void) = 0;
+	char key[256];		// キー入力
+	char keyOld[256];	// キー入力(old)
 };
 

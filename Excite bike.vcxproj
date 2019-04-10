@@ -132,9 +132,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="MapMng.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneTask.h" />
     <ClInclude Include="TitleScene.h" />
@@ -142,9 +144,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapMng.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneTask.cpp" />
     <ClCompile Include="TitleScene.cpp" />

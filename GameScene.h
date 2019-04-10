@@ -3,9 +3,11 @@
 #include <list>
 #include "BaseScene.h"
 #include "Player.h"
+#include "Camera.h"
 
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
+
 
 class GameScene :
 	public BaseScene
@@ -15,11 +17,17 @@ public:
 	~GameScene();
 	void Init(void);
 	uniqueBase Update(uniqueBase ub);
+	const VECTOR2 &GetDrawOffset(void);
 private:
 	int MovePos;	// ˆÚ“®‚³‚¹‚é
 	player_list::iterator player;
 	player_list playerList;	// player‚ğØ½Ä‚ÅŠÇ—‚µ‚½‚¢
-	void MakePlayer(void);
+	std::unique_ptr<Camera> camera;
+	void MakePlayer(VECTOR2 vec);
+	VECTOR2 RoadPos;	// “¹‚ÌÀ•W
+	VECTOR2 SuRoadPos;	// “¹‚ÌÀ•W2
+
+
 
 };
 

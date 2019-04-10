@@ -24,14 +24,20 @@ public:
 	Player();
 	Player(VECTOR2 pos);
 	~Player();
-	void Draw(std::string filename,VECTOR2 divSize,VECTOR2 divCnt,VECTOR2 chipOffset);	// ﾌﾟﾚｲﾔｰの描画
+	void Init(std::string filename,VECTOR2 divSize,VECTOR2 divCnt,VECTOR2 chipOffset);	// ﾌﾟﾚｲﾔｰの描画
+	void Draw(void);
 	void SetMove(void);
+	const VECTOR2 &GetPos(void);
 
 private:
-	VECTOR2 pos;		// ﾌﾟﾚｲﾔｰの座標
-	PL_STATE state;		// ﾌﾟﾚｲﾔｰの状態
-	ANIM_TBL animTbl;	// ｱﾆﾒｰｼｮﾝ
+	VECTOR2 pos;			// ﾌﾟﾚｲﾔｰの座標
+	PL_STATE state;			// ﾌﾟﾚｲﾔｰの状態
+	ANIM_TBL animTbl;		// ｱﾆﾒｰｼｮﾝ
 	char key[256];
-	int speed;			// ﾊﾞｲｸのｽﾋﾟｰﾄﾞ
+	int speed;				// ﾊﾞｲｸのｽﾋﾟｰﾄﾞ
+	std::string imageName;
+	VECTOR2 divSize;		//// 描画ﾁｯﾌﾟのｻｲｽﾞ
+	VECTOR2 divCnt;		// 描画ﾁｯﾌﾟ数（縦横）
+	VECTOR2 chipOffset; // 描画ﾁｯﾌﾟのイメージIDのｵﾌｾｯﾄ
 };
 

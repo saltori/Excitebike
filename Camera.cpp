@@ -80,7 +80,7 @@ void Camera::Update(void)
 
 void Camera::Draw(void)
 {
-	DrawRotaGraph(pos.x,pos.y,2,0,IMAGE_ID("image/cameraman.png")[1],true);
+	DrawRotaGraph(pos.x,pos.y,2,0,IMAGE_ID("image/rider.png")[20],true);
 }
 
 VECTOR2 Camera::GetdefPos(void)

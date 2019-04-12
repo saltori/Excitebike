@@ -136,7 +136,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="MapMng.h" />
+    <ClInclude Include="MapCtl.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneTask.h" />
     <ClInclude Include="TitleScene.h" />
@@ -148,7 +148,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapMng.cpp" />
+    <ClCompile Include="MapCtl.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneTask.cpp" />
     <ClCompile Include="TitleScene.cpp" />

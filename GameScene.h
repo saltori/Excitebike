@@ -24,8 +24,6 @@ private:
 	player_list playerList;	// player‚ğØ½Ä‚ÅŠÇ—‚µ‚½‚¢
 	std::unique_ptr<Camera> camera;
 	void MakePlayer(VECTOR2 vec);
-	VECTOR2 RoadPos;	// “¹‚ÌÀ•W
-	VECTOR2 SuRoadPos;	// “¹‚ÌÀ•W2
 
 
 

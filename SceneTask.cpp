@@ -3,8 +3,8 @@
 #include"ImageMng.h"
 #include "TitleScene.h"
 
-#define SCREEN_SIZE_X 800
-#define SCREEN_SIZE_Y 600
+constexpr int ScreenSizeX = 800;
+constexpr int ScreenSizeY = 600;
 
 //SceneTask *SceneTask::s_Instance = nullptr;
 //std::once_flag SceneTask::initFlag;
@@ -26,7 +26,7 @@ SceneTask::~SceneTask()
 int SceneTask::Init(void)
 {
 	SetWindowText("1701309_êÏìc ûx");
-	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);	// âÊñ ª≤Ωﬁê›íË
+	SetGraphMode(ScreenSizeX, ScreenSizeY, 16);	// âÊñ ª≤Ωﬁê›íË
 	ChangeWindowMode(true);				// true:windowÅ@false:ÃŸΩ∏ÿ∞›		
 	if (DxLib_Init() == -1)
 	{
@@ -52,7 +52,7 @@ void SceneTask::GameRun(void)
 
 VECTOR2 SceneTask::GetScreenSize(void)
 {
-	return VECTOR2(SCREEN_SIZE_X,SCREEN_SIZE_Y);
+	return VECTOR2(ScreenSizeX,ScreenSizeY);
 }
 
 void SceneTask::StartPrgTime()

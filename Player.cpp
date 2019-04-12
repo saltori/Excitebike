@@ -2,9 +2,11 @@
 #include "DxLib.h"
 #include "ImageMng.h"
 #include "SceneTask.h"
-
-#define PLAYER_DEF_SPEED (10)
-
+#include "MapCtl.h"
+#include "FontMng.h"
+constexpr int PlayerDefSpeed = 10;
+constexpr int DefaultEngine = 350;
+constexpr unsigned int EngineLimiter = 466;
 Player::Player()
 {
 
@@ -14,9 +16,13 @@ Player::Player()
 Player::Player(VECTOR2 pos)
 {
 	this->pos = pos;
-	speed = PLAYER_DEF_SPEED;
+	speed = PlayerDefSpeed;
 	state = PL_STATE::STOP;
-
+	engineBox.top		= 350;
+	engineBox.bottom	= 580;
+	engineBox.right		= DefaultEngine;
+	engineBox.left		= 520;
+	OHValue				= 0;
 }
 
 Player::~Player()
@@ -35,11 +41,9 @@ void Player::Init(std::string filename, VECTOR2 divSize, VECTOR2 divCnt, VECTOR2
 
 void Player::Draw(void)
 {
-	//if (imageName.length() == 0)
-	//{
-	//	return;
-	//}
-	//DrawRotaGraph(pos.x, pos.y,2,0, IMAGE_ID(imageName)[chipOffset.x + divCnt.x * chipOffset.y], true);
+	
+	DrawBox(engineBox.top, engineBox.left, engineBox.right + OHValue, engineBox.bottom, 0xFF0000, true);
+	DrawRotaGraph(lpSceneTask.GetScreenSize().x / 2, 547, 1.7, 0, IMAGE_ID("image/engine.png")[0], true);
 
 
 	int id = 0;
@@ -50,57 +54,97 @@ void Player::Draw(void)
 	}
 
 	DrawRotaGraph(pos.x, pos.y,2,0, IMAGE_ID(imageName)[id], true);
+
+
 }
 
 void Player::SetMove(void)
 {
 	memcpy(keyOld, key, sizeof(keyOld));
 	GetHitKeyStateAll(key);
-
-	if (key[KEY_INPUT_A])
+	if (OHValue != 0)
 	{
-		pos.x -= speed;
-		
+		OHValue--;
 	}
 	if (pos.x >= lpSceneTask.GetScreenSize().x / 2)
 	{
+		if ((engineBox.right + OHValue) >= EngineLimiter)
+		{
+
+		}
+		else
+		{
+			if (key[KEY_INPUT_A])
+			{
+				lpMapCtl.AddRoadpos({ speed / 2,0 });
+				lpMapCtl.AddWallpos({ speed / 2,0 });
+				OHValue++;
+			}
+			else if (key[KEY_INPUT_S])
+			{
+				lpMapCtl.AddRoadpos({ speed,0 });
+				lpMapCtl.AddWallpos({ speed,0 });
+				if ((engineBox.right + OHValue) <= EngineLimiter)
+				{
+					OHValue += 2;
+				}
+			}
+			else {}
+
+			if ((key[KEY_INPUT_A] && !keyOld[KEY_INPUT_A]) || (key[KEY_INPUT_S] && !keyOld[KEY_INPUT_S]))
+			{
+				SetAnim("走");
+				state = PL_STATE::RUN;
+			}
+			if (key[KEY_INPUT_DOWN] && !keyOld[KEY_INPUT_DOWN])
+			{
+				SetAnim("右");
+			}
+			if (key[KEY_INPUT_DOWN])
+			{
+				pos.y += speed / 2;
+
+			}
+			if (key[KEY_INPUT_UP] && !keyOld[KEY_INPUT_UP])
+			{
+				SetAnim("左");
+			}
+			if (key[KEY_INPUT_UP])
+			{
+				pos.y -= speed / 2;
+			}
+
+			if (key[KEY_INPUT_RIGHT] && !keyOld[KEY_INPUT_RIGHT])
+			{
+				SetAnim("ウィリー");
+				state = PL_STATE::WHEELIE;
+			}
+
+		}
+
+
 	}
 	else
 	{
-		if (key[KEY_INPUT_D])
+		if (key[KEY_INPUT_A])
+		{
+			pos.x += speed/2;
+			if ((engineBox.right + OHValue) <= EngineLimiter)
+			{
+				OHValue ++;
+			}
+		}
+		if (key[KEY_INPUT_S])
 		{
 			pos.x += speed;
-
+			if ((engineBox.right + OHValue) <= EngineLimiter)
+			{
+				OHValue += 2;
+			}
 		}
 	}
 
-	if (key[KEY_INPUT_D] && !keyOld[KEY_INPUT_D])
-	{
-		SetAnim("走");
-	}
-	if (key[KEY_INPUT_S]&&!keyOld[KEY_INPUT_S])
-	{
-		SetAnim("右");
-	}
-	if (key[KEY_INPUT_S])
-	{
-		pos.y += speed / 2;
 
-	}
-
-	if (key[KEY_INPUT_W] && !keyOld[KEY_INPUT_W])
-	{
-		SetAnim("左");
-	}
-	if (key[KEY_INPUT_W])
-	{
-		pos.y -= speed / 2;
-	}
-
-	if (key[KEY_INPUT_Q] && !keyOld[KEY_INPUT_Q])
-	{
-		SetAnim("ウィリー");
-	}
 
 	if (key[KEY_INPUT_E] && !keyOld[KEY_INPUT_E])
 	{
@@ -121,6 +165,10 @@ void Player::SetMove(void)
 	{
 		SetAnim("起");
 	}
+
+
+
+
 	animCnt++;
 }
 
@@ -131,7 +179,7 @@ const VECTOR2 & Player::GetPos(void)
 
 const int Player::GetplayerSpeed(void)
 {
-	return PLAYER_DEF_SPEED;
+	return PlayerDefSpeed;
 }
 
 bool Player::SetAnim(std::string animName)

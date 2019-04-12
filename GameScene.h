@@ -19,9 +19,9 @@ public:
 	uniqueBase Update(uniqueBase ub);
 	const VECTOR2 &GetDrawOffset(void);
 private:
-	int MovePos;	// ˆÚ“®‚³‚¹‚é
 	player_list::iterator player;
 	player_list playerList;	// player‚ğØ½Ä‚ÅŠÇ—‚µ‚½‚¢
+
 	std::unique_ptr<Camera> camera;
 	void MakePlayer(VECTOR2 vec);
 

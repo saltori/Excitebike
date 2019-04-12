@@ -4,13 +4,7 @@
 #include <memory>
 #include "Player.h"
 
-struct square
-{
-	int top;
-	int bottom;
-	int right;
-	int left;
-};
+
 
 
 class Camera

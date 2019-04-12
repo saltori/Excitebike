@@ -1,4 +1,13 @@
 #pragma once
+
+struct square
+{
+	int top;
+	int bottom;
+	int right;
+	int left;
+};
+
 class VECTOR2
 {
 public:

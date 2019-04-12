@@ -4,6 +4,7 @@
 #include <map>
 #include "VECTOR2.h"
 
+
 enum class PL_STATE {
 	STOP,		// ~‚Ü‚Á‚Ä‚¢‚é
 	RUN,		// ‘–só‘Ô
@@ -18,6 +19,11 @@ enum class ANIM_TBL {
 	INV,		// ²İÀ°ÊŞÙ
 	MAX
 };
+
+constexpr int PlayerDivSize = 24;	// ÌßÚ²Ô°‚Ì»²½Ş
+constexpr int PlayerDivCnt = 6;		// ÌßÚ²Ô°‚ÌºÏ”
+constexpr int PlayerChipOffsetX = 1;// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
+constexpr int PlayerChipOffsetY = 0;// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
 
 class Player
 {
@@ -48,5 +54,7 @@ private:
 	unsigned int animCnt;
 	bool AddAnim(std::string animName, int id_x, int id_y, int frame, int inv);
 	bool initAnim(void);
+	square engineBox;			// ´İ¼Şİ
+	unsigned int OHValue;			// µ°ÊŞ°Ë°Ä
 };
 

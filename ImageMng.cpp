@@ -5,23 +5,6 @@
 
 std::unique_ptr<ImageMng, ImageMng::ImageMngDeleter> ImageMng::s_Instance(new ImageMng());
 
-//std::once_flag ImageMng::initFlag;
-//ImageMng *ImageMng::s_Instance = nullptr;
-
-//void ImageMng::Create()
-//{
-//	s_Instance = new ImageMng();
-//}
-
-//void ImageMng::Destroy()
-//{
-//	if (s_Instance)
-//	{
-//		delete s_Instance;
-//	}
-//	s_Instance = nullptr;
-//}
-
 ImageMng::ImageMng()
 {
 }

@@ -1,18 +1,21 @@
 #include <memory>
 #include "DxLib.h"
+#include "VECTOR2.h"
 #include "SceneTask.h"
 #include "TitleScene.h"
 #include "ImageMng.h"
 #include "GameScene.h"
+#include "FontMng.h"
 
-#define CURSOR_DEF_POS_X (275)
-#define CURSOR_DEF_POS_Y (325)
+constexpr int CursorDefPosX = 275;
+constexpr int CursorDefPosY = 325;
+
 
 
 TitleScene::TitleScene()
 {
-	CursorPos.x = CURSOR_DEF_POS_X;
-	CursorPos.y = CURSOR_DEF_POS_Y;
+	CursorPos.x = CursorDefPosX;
+	CursorPos.y = CursorDefPosY;
 }
 
 TitleScene::~TitleScene()
@@ -35,7 +38,7 @@ uniqueBase TitleScene::Update(uniqueBase ub)
 	{
 		if (CursorPos.y >= 415)
 		{
-			CursorPos.y = CURSOR_DEF_POS_Y;
+			CursorPos.y = CursorDefPosY;
 		}
 		else 
 		{
@@ -46,7 +49,7 @@ uniqueBase TitleScene::Update(uniqueBase ub)
 
 	if (key[KEY_INPUT_W] && !keyOld[KEY_INPUT_W])
 	{
-		if (CursorPos.y <= CURSOR_DEF_POS_Y)
+		if (CursorPos.y <= CursorDefPosY)
 		{
 			CursorPos.y = 415;
 		}
@@ -56,7 +59,6 @@ uniqueBase TitleScene::Update(uniqueBase ub)
 		}
 
 	}
-
 	if (key[KEY_INPUT_SPACE])
 	{
 		return std::make_unique<GameScene>();

@@ -54,7 +54,10 @@ private:
 	unsigned int animCnt;
 	bool AddAnim(std::string animName, int id_x, int id_y, int frame, int inv);
 	bool initAnim(void);
-	square engineBox;			// ´Ý¼ÞÝ
-	unsigned int OHValue;			// µ°ÊÞ°Ë°Ä
+	bool OHflag;					// µ°ÊÞ°Ë°Ä‚©‚Ç‚¤‚©‚ÌÌ×¸Þ
+	square engineBox;				// ´Ý¼ÞÝ
+	float OHValue;					// µ°ÊÞ°Ë°Ä
+	int engineFlash;				// ´Ý¼ÞÝ‚ð“_–Å‚³‚¹‚é—p
+	bool animCntAddflg;				// ±ÆÒ°¼®Ý‚ÌÙ°Ìß—p
 };
 

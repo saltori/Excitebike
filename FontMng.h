@@ -2,8 +2,10 @@
 #include<memory>
 #include<mutex>
 #include <map>
-#include <list>
+#include <vector>
 #include "VECTOR2.h"
+
+#define lpFontMng (FontMng::GetInstance())
 
 class FontMng
 {
@@ -12,7 +14,8 @@ public:
 	{
 		return *s_Instance;
 	}
-	void FontDraw(std::string drawfont);
+	void FontSet(std::string drawfont);			// 表示したい文字をｾｯﾄする
+	void FontDraw(VECTOR2 pos,VECTOR2 offset,bool Flashflag);	// 文字を表示する座標と文字の間の感覚と点滅させるか
 	void FontInit(void);
 private:
 	struct FontMngDeleter
@@ -24,13 +27,13 @@ private:
 	};
 	FontMng();
 	~FontMng();
-	int i;
 	char key[256];
 	char keyOld[256];
 	static std::unique_ptr<FontMng, FontMngDeleter> s_Instance;
 	std::map<char, int> FontMap;
-	std::list<char> DrawFontList;
+	std::vector<char> DrawFontList;
 	VECTOR2 pos;
+	int Flash;	// 点滅用のｶｳﾝﾀｰ
 
 };
 

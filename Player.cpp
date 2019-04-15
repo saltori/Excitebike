@@ -23,6 +23,9 @@ Player::Player(VECTOR2 pos)
 	engineBox.right		= DefaultEngine;
 	engineBox.left		= 520;
 	OHValue				= 0;
+	OHflag				= false;
+	engineFlash			= 0;
+	animCntAddflg		= true;
 }
 
 Player::~Player()
@@ -41,10 +44,22 @@ void Player::Init(std::string filename, VECTOR2 divSize, VECTOR2 divCnt, VECTOR2
 
 void Player::Draw(void)
 {
-	
-	DrawBox(engineBox.top, engineBox.left, engineBox.right + OHValue, engineBox.bottom, 0xFF0000, true);
-	DrawRotaGraph(lpSceneTask.GetScreenSize().x / 2, 547, 1.7, 0, IMAGE_ID("image/engine.png")[0], true);
 
+	if (OHflag)
+	{
+		engineFlash++;
+		if (engineFlash / 10 % 2)
+		{
+			DrawBox(engineBox.top, engineBox.left, engineBox.right + OHValue, engineBox.bottom, 0xFF0000, true);
+		}
+
+	}
+	else 
+	{
+		DrawBox(engineBox.top, engineBox.left, engineBox.right + OHValue, engineBox.bottom, 0xFF0000, true);
+	}
+
+	DrawRotaGraph(lpSceneTask.GetScreenSize().x / 2, 547, 1.7, 0, IMAGE_ID("image/engine.png")[0], true);
 
 	int id = 0;
 
@@ -62,23 +77,48 @@ void Player::SetMove(void)
 {
 	memcpy(keyOld, key, sizeof(keyOld));
 	GetHitKeyStateAll(key);
-	if (OHValue != 0)
-	{
-		OHValue--;
-	}
+
 	if (pos.x >= lpSceneTask.GetScreenSize().x / 2)
 	{
-		if ((engineBox.right + OHValue) >= EngineLimiter)
+		if(OHflag)
 		{
+			lpFontMng.FontDraw({ 330,200, }, { 18,0 }, true);
+			//OHValue -= 0.01f;
+			if (key[KEY_INPUT_K])
+			{
+				OHValue = 0.0f;
+			}
+			if (OHValue <= 0)
+			{
+				OHflag = false;
+			}
+			if (pos.y >= 320)
+			{
+				pos.y--;
+			}
+
 
 		}
 		else
 		{
+			if (OHValue != 0)
+			{
+				OHValue -= 0.3f;
+			}
+			if ((engineBox.right + OHValue) >= EngineLimiter)
+			{
+			//	OHflag = true;
+				lpFontMng.FontSet("OVER HEAT");
+			}
 			if (key[KEY_INPUT_A])
 			{
 				lpMapCtl.AddRoadpos({ speed / 2,0 });
 				lpMapCtl.AddWallpos({ speed / 2,0 });
-				OHValue++;
+				
+				if ((engineBox.right + OHValue) <= EngineLimiter -20)
+				{
+					OHValue += 0.5f;
+				}
 			}
 			else if (key[KEY_INPUT_S])
 			{
@@ -86,17 +126,43 @@ void Player::SetMove(void)
 				lpMapCtl.AddWallpos({ speed,0 });
 				if ((engineBox.right + OHValue) <= EngineLimiter)
 				{
-					OHValue += 2;
+					OHValue += 0.7f;
 				}
 			}
 			else {}
 
-			if ((key[KEY_INPUT_A] && !keyOld[KEY_INPUT_A]) || (key[KEY_INPUT_S] && !keyOld[KEY_INPUT_S]))
+			if ((key[KEY_INPUT_A] && !keyOld[KEY_INPUT_A]))
 			{
+				animCntAddflg = true;
 				SetAnim("走");
 				state = PL_STATE::RUN;
 			}
-			if (key[KEY_INPUT_DOWN] && !keyOld[KEY_INPUT_DOWN])
+			if ((key[KEY_INPUT_S] && !keyOld[KEY_INPUT_S]))
+			{
+				animCntAddflg = true;
+				SetAnim("走");
+				state = PL_STATE::RUN;
+			}
+
+			if (key[KEY_INPUT_LEFT] && !keyOld[KEY_INPUT_LEFT])
+			{
+				SetAnim("ウィリー");
+				state = PL_STATE::WHEELIE;
+			}
+			if (state == PL_STATE::WHEELIE)
+			{
+				if (animCnt == 30)
+				{
+					animCntAddflg = false;
+				}
+			}
+
+			if (key[KEY_INPUT_RIGHT] && !keyOld[KEY_INPUT_RIGHT])
+			{
+				SetAnim("着地");
+			}
+
+			if (key[KEY_INPUT_DOWN] && keyOld[KEY_INPUT_DOWN])
 			{
 				SetAnim("右");
 			}
@@ -113,19 +179,28 @@ void Player::SetMove(void)
 			{
 				pos.y -= speed / 2;
 			}
-
-			if (key[KEY_INPUT_RIGHT] && !keyOld[KEY_INPUT_RIGHT])
-			{
-				SetAnim("ウィリー");
-				state = PL_STATE::WHEELIE;
-			}
-
 		}
 
 
 	}
 	else
 	{
+		if (OHValue != 0)
+		{
+			OHValue -= 0.3f;
+		}
+
+		if ((key[KEY_INPUT_A] && !keyOld[KEY_INPUT_A]))
+		{
+			SetAnim("走");
+			state = PL_STATE::RUN;
+		}
+		if ((key[KEY_INPUT_S] && !keyOld[KEY_INPUT_S]))
+		{
+			SetAnim("走");
+			state = PL_STATE::RUN;
+		}
+
 		if (key[KEY_INPUT_A])
 		{
 			pos.x += speed/2;
@@ -142,14 +217,26 @@ void Player::SetMove(void)
 				OHValue += 2;
 			}
 		}
+		if (key[KEY_INPUT_DOWN] && !keyOld[KEY_INPUT_DOWN])
+		{
+			SetAnim("右");
+		}
+		if (key[KEY_INPUT_DOWN])
+		{
+			pos.y += speed / 2;
+
+		}
+		if (key[KEY_INPUT_UP] && !keyOld[KEY_INPUT_UP])
+		{
+			SetAnim("左");
+		}
+		if (key[KEY_INPUT_UP])
+		{
+			pos.y -= speed / 2;
+		}
 	}
 
 
-
-	if (key[KEY_INPUT_E] && !keyOld[KEY_INPUT_E])
-	{
-		SetAnim("着地");
-	}
 
 	if (key[KEY_INPUT_Z] && !keyOld[KEY_INPUT_Z])
 	{
@@ -168,8 +255,10 @@ void Player::SetMove(void)
 
 
 
-
-	animCnt++;
+	if (animCntAddflg)
+	{
+		animCnt++;
+	}
 }
 
 const VECTOR2 & Player::GetPos(void)
@@ -215,7 +304,7 @@ bool Player::initAnim(void)
 	AddAnim("走",1,0,2,3);
 	AddAnim("左", 3, 0, 1, 5);
 	AddAnim("右", 4, 0, 1, 5);
-	AddAnim("ウィリー", 0, 1, 5, 8);
+	AddAnim("ウィリー", 0, 1, 5, 10);
 	AddAnim("着地", 0, 2, 3, 10);
 	AddAnim("逆", 0, 3, 4, 10);
 	AddAnim("足", 5, 3, 2, 10);

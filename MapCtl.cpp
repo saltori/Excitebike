@@ -28,25 +28,17 @@ VECTOR2 MapCtl::GetViewSize(void)
 
 void MapCtl::MapDraw(void)
 {
-
-	DrawGraph(roadPos.x, roadPos.y, IMAGE_ID("image/road.png")[0], true);
-	DrawGraph(roadPos.x + 1009, roadPos.y, IMAGE_ID("image/road.png")[0], true);
-
-	DrawGraph(WallPos.x, WallPos.y, IMAGE_ID("image/wall.png")[0], true);
-	DrawGraph(WallPos.x + Walloffset, WallPos.y, IMAGE_ID("image/wall.png")[0], true);
+	for (int i = 0; i < 10; i++)
+	{
+		DrawGraph(roadPos.x + RoadOffset * i, roadPos.y, IMAGE_ID("image/road.png")[0], true);
+		DrawGraph(WallPos.x + Walloffset * i, WallPos.y, IMAGE_ID("image/wall.png")[0], true);
+	}
+	DrawFormatString(100,100,0x000000,"posX : %d",roadPos.x);
 	Update();
 }
 
 void MapCtl::Update(void)
 {
-	if (roadPos.x <= (-RoadOffset + BackDefPosX))
-	{
-		roadPos.x = BackDefPosX;
-	}
-	if (WallPos.x <= (-Walloffset + BackDefPosX))
-	{
-		WallPos.x = BackDefPosX;
-	}
 }
 
 void MapCtl::AddWallpos(VECTOR2 vec)
@@ -64,6 +56,7 @@ MapCtl::MapCtl():RoadOffset(1009),Walloffset(1150)
 {
 	roadPos = { BackDefPosX,RoadPosY };
 	WallPos = { BackDefPosX ,BackWallPosY };
+	roadPos2 = { roadPos.x + RoadOffset,RoadPosY };
 }
 
 

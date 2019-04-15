@@ -30,6 +30,7 @@ void GameScene::Init(void)
 	camera->SetPos(VECTOR2(400,200));
 	(*player)->SetAnim("Ž~");
 	
+	
 }
 
 uniqueBase GameScene::Update(uniqueBase ub)
@@ -47,7 +48,6 @@ uniqueBase GameScene::Update(uniqueBase ub)
 	camera->Update();
 	(*player)->SetMove();
 	
-	FontMng::GetInstance().FontDraw("aaa");
 	ScreenFlip();
 	return ub;
 }

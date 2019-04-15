@@ -24,6 +24,7 @@ private:
 	const int RoadOffset;		// “¹‚ÌµÌ¾¯Ä
 	const int Walloffset;		// •Ç‚ÌµÌ¾¯Ä
 	VECTOR2 roadPos;			// “¹‚ÌÀ•W
+	VECTOR2 roadPos2;			// “¹‚ÌÀ•W2
 	VECTOR2 WallPos;			// •Ç‚ÌÀ•W
 
 	struct MapCtlDeleter

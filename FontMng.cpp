@@ -1,21 +1,53 @@
 #include "DxLib.h"
 #include <string>
+#include <algorithm>
 #include "FontMng.h"
 #include "ImageMng.h"
 
 
 std::unique_ptr<FontMng, FontMng::FontMngDeleter> FontMng::s_Instance(new FontMng());
 
-void FontMng::FontDraw(std::string drawfont)
+void FontMng::FontSet(std::string drawfont)
 {
-	drawfont;
-
-	for (auto i: drawfont)
+	std::string str;
+	DrawFontList.clear();
+	str = drawfont;
+	std::transform(str.begin(), str.end(), str.begin(), toupper);
+	for (int i =0; i <= str.size(); i++)
 	{
-	//	DrawFontList.push_back(drawfont[i]);
+		DrawFontList.push_back(str[i]);
 	}
-	DrawRotaGraph(300, 300,3,0, IMAGE_ID("image/font.png")[0], true);
 
+}
+
+void FontMng::FontDraw(VECTOR2 pos, VECTOR2 offset,bool Flashflag)
+{
+
+	if (DrawFontList.size() == 0)
+	{
+		return;
+	}
+
+	if (Flashflag)
+	{
+		Flash++;
+		if (Flash / 20 % 2)
+		{
+			for (auto tmp : DrawFontList)
+			{
+				DrawRotaGraph(pos.x, pos.y, 2, 0, FontMap[tmp], true);
+				pos += offset;
+			}
+		}
+	}
+	else
+	{
+		for (auto tmp : DrawFontList)
+		{
+			DrawRotaGraph(pos.x, pos.y, 2, 0, FontMap[tmp], true);
+			pos += offset;
+		}
+	}
 }
 
 FontMng::FontMng()
@@ -28,7 +60,7 @@ FontMng::~FontMng()
 
 void FontMng::FontInit(void)
 {
-
+	Flash = 0;
 	ImageMng::GetInstance().GetID("image/font.png", { 8,8 }, { 13,3 }, { 0,0 });
 	FontMap['1'] = IMAGE_ID("image/font.png")[1];
 	FontMap['2'] = IMAGE_ID("image/font.png")[2];

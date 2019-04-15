@@ -16,6 +16,12 @@
     <Filter Include="ソース ファイル\Scene">
       <UniqueIdentifier>{0fafb796-7e82-4043-ae94-5347509dcf2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\TrackPart">
+      <UniqueIdentifier>{707229ff-079e-4814-a17b-b357da59e2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\TrackPart">
+      <UniqueIdentifier>{049003c5-e156-4fe8-a996-bbca287a6a3d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ヘッダー ファイル\Scene">
       <UniqueIdentifier>{72c5815e-beb8-48a7-8d8d-d83990366a50}</UniqueIdentifier>
     </Filter>
@@ -54,6 +60,9 @@
     <ClInclude Include="FontMng.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="TrackPart.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="FontMng.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackPart.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

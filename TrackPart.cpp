@@ -6,6 +6,11 @@ TrackPart::TrackPart()
 {
 }
 
+TrackPart::TrackPart(VECTOR2 pos)
+{
+	this->pos = pos;
+}
+
 
 TrackPart::~TrackPart()
 {
@@ -13,5 +18,9 @@ TrackPart::~TrackPart()
 
 Track_Parts TrackPart::GetTrackPartState(void)
 {
-	return Partstate;
+	return Track_Parts::MAX;
 }
+
+
+
+

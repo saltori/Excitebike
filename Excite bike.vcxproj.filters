@@ -25,12 +25,15 @@
     <Filter Include="ヘッダー ファイル\Scene">
       <UniqueIdentifier>{72c5815e-beb8-48a7-8d8d-d83990366a50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Mng">
+      <UniqueIdentifier>{f3260a0f-f122-4149-95d6-4732d528115a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Mng">
+      <UniqueIdentifier>{70f860b6-2e2a-403d-b6ee-18be299d0d83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageMng.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="VECTOR2.h">
@@ -54,14 +57,23 @@
     <ClInclude Include="Camera.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="MapCtl.h">
+    <ClInclude Include="TrackPart.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
+    <ClInclude Include="SlopeA.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
+    <ClInclude Include="FVECTOR2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="FontMng.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Mng</Filter>
     </ClInclude>
-    <ClInclude Include="TrackPart.h">
-      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    <ClInclude Include="ImageMng.h">
+      <Filter>ヘッダー ファイル\Mng</Filter>
+    </ClInclude>
+    <ClInclude Include="MapCtl.h">
+      <Filter>ヘッダー ファイル\Mng</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +92,6 @@
     <ClCompile Include="BaseScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ImageMng.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
@@ -92,14 +101,23 @@
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="MapCtl.cpp">
+    <ClCompile Include="TrackPart.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
+    </ClCompile>
+    <ClCompile Include="SlopeA.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
+    </ClCompile>
+    <ClCompile Include="FVECTOR2.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="FontMng.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Mng</Filter>
     </ClCompile>
-    <ClCompile Include="TrackPart.cpp">
-      <Filter>ソース ファイル\TrackPart</Filter>
+    <ClCompile Include="ImageMng.cpp">
+      <Filter>ソース ファイル\Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="MapCtl.cpp">
+      <Filter>ソース ファイル\Mng</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

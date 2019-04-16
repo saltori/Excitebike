@@ -2,7 +2,11 @@
 #include <vector>
 #include <memory>
 #include "VECTOR2.h"
+#include "TrackPart.h"
+#include "FVECTOR2.h"
 
+using trackpart_ptr = std::unique_ptr<TrackPart>;
+using trackpart_vec = std::vector<trackpart_ptr>;
 
 #define lpMapCtl (MapCtl::GetInstance())
 
@@ -20,13 +24,15 @@ public:
 	char key[256];
 	void AddWallpos(VECTOR2 vec);
 	void AddRoadpos(VECTOR2 vec);
+	bool HitCheck(FVECTOR2 pos);
 private:
 	const int RoadOffset;		// ìπÇÃµÃæØƒ
 	const int Walloffset;		// ï«ÇÃµÃæØƒ
 	VECTOR2 roadPos;			// ìπÇÃç¿ïW
 	VECTOR2 roadPos2;			// ìπÇÃç¿ïW2
 	VECTOR2 WallPos;			// ï«ÇÃç¿ïW
-
+	void SetState(Track_Parts state,VECTOR2 pos);
+	trackpart_vec partvec;
 	struct MapCtlDeleter
 	{
 		void operator()(MapCtl* mapCtl) const

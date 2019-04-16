@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include "VECTOR2.h"
+#include "FVECTOR2.h"
 
 
 enum class PL_STATE {
@@ -20,16 +21,17 @@ enum class ANIM_TBL {
 	MAX
 };
 
-constexpr int PlayerDivSize = 24;	// ÌßÚ²Ô°‚Ì»²½Ş
-constexpr int PlayerDivCnt = 6;		// ÌßÚ²Ô°‚ÌºÏ”
-constexpr int PlayerChipOffsetX = 1;// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
-constexpr int PlayerChipOffsetY = 0;// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
+constexpr int PlayerDivSize		= 24;	// ÌßÚ²Ô°‚Ì»²½Ş
+constexpr int PlayerDivCnt		= 6;	// ÌßÚ²Ô°‚ÌºÏ”
+constexpr int PlayerChipOffsetX = 1;	// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
+constexpr int PlayerChipOffsetY = 0;	// •`‰æÁ¯Ìß‚ÌµÌ¾¯Ä
+constexpr float GroundPos		= 200.0f;	// ’n–Ê‚©‹ó’†‰»‚Ì•ªŠò“_
 
 class Player
 {
 public:
 	Player();
-	Player(VECTOR2 pos);
+	Player(FVECTOR2 pos);
 	~Player();
 	void Init(std::string filename,VECTOR2 divSize,VECTOR2 divCnt,VECTOR2 chipOffset);	// ÌßÚ²Ô°‚Ì•`‰æ
 	void Draw(void);
@@ -38,8 +40,9 @@ public:
 	const int GetplayerSpeed(void);
 	bool SetAnim(std::string animName);
 	void AddanimCnt(int aniCnt);
+
 private:
-	VECTOR2 pos;			// ÌßÚ²Ô°‚ÌÀ•W
+	FVECTOR2 pos;			// ÌßÚ²Ô°‚ÌÀ•W
 	PL_STATE state;			// ÌßÚ²Ô°‚Ìó‘Ô
 	ANIM_TBL animTbl;		// ±ÆÒ°¼®İ
 	char key[256];

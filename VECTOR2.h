@@ -19,6 +19,7 @@ public:
 	// ‘ã“ü‰‰ŽZŽq
 	VECTOR2& operator = (const VECTOR2& vec);
 	VECTOR2& operator = (const int& num);
+	VECTOR2& operator = (const float& num);
 
 	// “Y‚¦Žš‰‰ŽZŽq
 	int& operator [](int i);

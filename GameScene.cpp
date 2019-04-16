@@ -21,7 +21,7 @@ GameScene::~GameScene()
 
 void GameScene::Init(void)
 {
-	MakePlayer(VECTOR2(100, 340));
+	MakePlayer(FVECTOR2(100.0f, 340.0f));
 	player = playerList.begin();
 	(*player)->Init("image/rider.png", { PlayerDivSize,PlayerDivSize }, { PlayerDivCnt,PlayerDivCnt }, { 1,0});
 	FontMng::GetInstance().FontInit();
@@ -57,7 +57,7 @@ const VECTOR2 & GameScene::GetDrawOffset(void)
 	return -(camera->GetPos() - lpSceneTask.GetScreenSize() / 2);
 }
 
-void GameScene::MakePlayer(VECTOR2 vec)
+void GameScene::MakePlayer(FVECTOR2 vec)
 {
 	playerList.push_back(std::make_shared<Player>(vec));
 }

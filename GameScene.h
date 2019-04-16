@@ -4,6 +4,7 @@
 #include "BaseScene.h"
 #include "Player.h"
 #include "Camera.h"
+#include "FVECTOR2.h"
 
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
@@ -23,7 +24,7 @@ private:
 	player_list playerList;	// player‚ğØ½Ä‚ÅŠÇ—‚µ‚½‚¢
 
 	std::unique_ptr<Camera> camera;
-	void MakePlayer(VECTOR2 vec);
+	void MakePlayer(FVECTOR2 vec);
 
 
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "VECTOR2.h"
+#include "FVECTOR2.h"
 enum class Track_Parts
 {
 	SLOPE_A,
@@ -22,10 +23,16 @@ class TrackPart
 {
 public:
 	TrackPart();
+	TrackPart(VECTOR2 pos);
 	~TrackPart();
-	Track_Parts GetTrackPartState(void);
+	virtual Track_Parts GetTrackPartState(void) = 0;
+	virtual void Draw(void) = 0;
+	virtual square GetHitBox(void) = 0;
+	virtual void AddPartPos(int speed)=0;
+	virtual void Update(void) = 0;
+	virtual bool HitCheck(FVECTOR2 pos) = 0;
 private:
-	VECTOR2 pos;			// Êß°Â‚ÌÀ•W
+	VECTOR2 pos;		// Êß°Â‚ÌÀ•W
 	square HitBox;			// “–‚½‚è”»’è
 	Track_Parts Partstate;	// ‚Ç‚Ì•”•i
 };

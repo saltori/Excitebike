@@ -1,6 +1,7 @@
 #pragma once
 #include "VECTOR2.h"
 #include "FVECTOR2.h"
+#include "Player.h"
 enum class Track_Parts
 {
 	SLOPE_A,
@@ -17,13 +18,14 @@ enum class Track_Parts
 	WIDE_TURF,
 	MISHMASH,
 	SWAMP,
+	FNISH,
 	MAX
 };
 class TrackPart
 {
 public:
 	TrackPart();
-	TrackPart(VECTOR2 pos);
+	TrackPart(int y);
 	~TrackPart();
 	virtual Track_Parts GetTrackPartState(void) = 0;
 	virtual void Draw(void) = 0;
@@ -31,6 +33,7 @@ public:
 	virtual void AddPartPos(int speed)=0;
 	virtual void Update(void) = 0;
 	virtual bool HitCheck(FVECTOR2 pos) = 0;
+	virtual void HitEffect(float &speed,PL_STATE &state,float &OHValue) = 0;
 private:
 	VECTOR2 pos;		//  ﬂ∞¬ÇÃç¿ïW
 	square HitBox;			// ìñÇΩÇËîªíË

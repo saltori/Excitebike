@@ -16,6 +16,7 @@ public:
 	}
 	void FontSet(std::string drawfont);			// 表示したい文字をｾｯﾄする
 	void FontDraw(VECTOR2 pos,VECTOR2 offset,bool Flashflag);	// 文字を表示する座標と文字の間の感覚と点滅させるか
+	void FontDraw(std::string drawfont, VECTOR2 pos, VECTOR2 offset, bool Flashflag);							// 上2つまとめたやつ
 	void FontInit(void);
 private:
 	struct FontMngDeleter
@@ -34,6 +35,7 @@ private:
 	std::vector<char> DrawFontList;
 	VECTOR2 pos;
 	int Flash;	// 点滅用のｶｳﾝﾀｰ
+	std::string str;
 
 };
 

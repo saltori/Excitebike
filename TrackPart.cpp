@@ -6,9 +6,8 @@ TrackPart::TrackPart()
 {
 }
 
-TrackPart::TrackPart(VECTOR2 pos)
+TrackPart::TrackPart(int x)
 {
-	this->pos = pos;
 }
 
 

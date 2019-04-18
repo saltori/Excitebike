@@ -1,15 +1,17 @@
 #include "SlopeA.h"
 #include"ImageMng.h"
 #include "Dxlib.h"
+#include "MapCtl.h"
+constexpr int SlopeAPosY = 380;
 
 SlopeA::SlopeA()
 {
 
 }
 
-SlopeA::SlopeA(VECTOR2 pos)
+SlopeA::SlopeA(int x)
 {
-	this->pos = pos;
+	this->pos = {x,SlopeAPosY};
 	HitBox.top = pos.x - 50;
 	HitBox.right = pos.x;
 	HitBox.bottom = pos.y + 70;
@@ -28,8 +30,8 @@ Track_Parts SlopeA::GetTrackPartState(void)
 
 void SlopeA::Draw(void)
 {
+	//DrawBox(HitBox.top, HitBox.bottom, HitBox.right, HitBox.left, 0x000000, true);
 	DrawRotaGraph(pos.x,pos.y,2.2f,0,IMAGE_ID("image/TrakPart/slopeA.png")[0],true);
-	DrawBox(HitBox.top, HitBox.bottom, HitBox.right, HitBox.left,0x000000,true);
 }
 
 square SlopeA::GetHitBox(void)
@@ -59,4 +61,11 @@ bool SlopeA::HitCheck(FVECTOR2 pos)
 		return true;
 	}
 	return false;
+}
+
+void SlopeA::HitEffect(float & speed, PL_STATE &state, float &OHValue)
+{
+	state = PL_STATE::JUMP;
+	lpMapCtl.AddRoadpos({ speed,0 });
+	lpMapCtl.AddWallpos({ speed,0 });
 }

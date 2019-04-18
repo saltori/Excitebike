@@ -1,12 +1,13 @@
 #pragma once
 #include "TrackPart.h"
-class SlopeA :
+
+class Axcel :
 	public TrackPart
 {
 public:
-	SlopeA();
-	SlopeA(int x);
-	~SlopeA();
+	Axcel();
+	Axcel(int PosX);
+	~Axcel();
 	Track_Parts GetTrackPartState(void);
 	void Draw(void);
 	square GetHitBox(void);
@@ -15,7 +16,7 @@ public:
 	bool HitCheck(FVECTOR2 pos);
 	void HitEffect(float &speed, PL_STATE &state, float &OHValue);
 private:
-	VECTOR2 pos;			// Êß°Â‚ÌÀ•W
+	VECTOR2 pos;		// Êß°Â‚ÌÀ•W
 	square HitBox;			// “–‚½‚è”»’è
 	Track_Parts Partstate;	// ‚Ç‚Ì•”•i
 };

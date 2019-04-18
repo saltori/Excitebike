@@ -1,12 +1,13 @@
 #pragma once
 #include "TrackPart.h"
-class SlopeA :
+class SlopeB:
 	public TrackPart
+
 {
 public:
-	SlopeA();
-	SlopeA(int x);
-	~SlopeA();
+	SlopeB();
+	SlopeB(int x);
+	~SlopeB();
 	Track_Parts GetTrackPartState(void);
 	void Draw(void);
 	square GetHitBox(void);

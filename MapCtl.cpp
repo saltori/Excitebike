@@ -4,15 +4,19 @@
 #include "SceneTask.h"
 #include "Player.h"
 #include  "SlopeA.h"
+#include "SlopeB.h"
+#include "Axcel.h"
+#include "Swamp.h"
+#include "Finish.h"
 
 constexpr int ViewAreaCntX = 800;
 constexpr int ViewAreaCntY = 600;
 constexpr int GameAreaCntX = ViewAreaCntX * 5;
 constexpr int GameAreaCntY = 600;
 
-constexpr int BackDefPosX	= -10;								// îwåi(1ñáñ⁄)ÇÃXç¿ïW
-constexpr int BackWallPosY	= -50;								// ï«ÇÃYç¿ïW
-constexpr int RoadPosY		= 270;								// ìπÇÃYç¿ïW
+constexpr float BackDefPosX		= -10.0f;								// îwåi(1ñáñ⁄)ÇÃXç¿ïW
+constexpr float BackWallPosY	= -50.0f;								// ï«ÇÃYç¿ïW
+constexpr float RoadPosY		= 270.0f;								// ìπÇÃYç¿ïW
 
 
 std::unique_ptr<MapCtl, MapCtl::MapCtlDeleter> MapCtl::s_Instance(new MapCtl());
@@ -29,18 +33,23 @@ VECTOR2 MapCtl::GetViewSize(void)
 
 void MapCtl::MapDraw(void)
 {
-	square hitbox;
 	for (int i = 0; i < 10; i++)
 	{
 		DrawGraph(roadPos.x + RoadOffset * i, roadPos.y, IMAGE_ID("image/road.png")[0], true);
 		DrawGraph(WallPos.x + Walloffset * i, WallPos.y, IMAGE_ID("image/wall.png")[0], true);
 	}
-	DrawFormatString(100,100,0x000000,"posX : %d",roadPos.x);
 
 	for (auto tmp = partvec.begin();tmp != partvec.end();tmp++)
 	{
 		(**tmp).Update();
 	}
+	if (roadPos.x <= -10000)
+	{
+		RecordTime = lpSceneTask.GetPrgTime();
+		
+	}
+	DrawFormatString(20,70, 0x000000,"Time:%d", RecordTime);
+	DrawFormatString(20, 40, 0x000000, "roadPosX:%f", roadPos.x);
 
 	Update();
 }
@@ -49,12 +58,12 @@ void MapCtl::Update(void)
 {
 }
 
-void MapCtl::AddWallpos(VECTOR2 vec)
+void MapCtl::AddWallpos(FVECTOR2 vec)
 {
 	WallPos -= vec;
 }
 
-void MapCtl::AddRoadpos(VECTOR2 vec)
+void MapCtl::AddRoadpos(FVECTOR2 vec)
 {
 	roadPos -= vec;
 	for (auto tmp = partvec.begin(); tmp != partvec.end(); tmp++)
@@ -73,14 +82,23 @@ bool MapCtl::HitCheck(FVECTOR2 pos)
 	return rtnFlag;
 }
 
-void MapCtl::SetState(Track_Parts state, VECTOR2 pos)
+void MapCtl::HitEffect(float & speed, PL_STATE &state, float &OHValue)
+{
+	for (auto tmp = partvec.begin(); tmp != partvec.end(); tmp++)
+	{
+		(**tmp).HitEffect(speed,state,OHValue);
+	}
+}
+
+void MapCtl::SetState(Track_Parts state, int PosX)
 {
 	switch (state)
 	{
 	case Track_Parts::SLOPE_A:
-		partvec.push_back(std::make_unique<SlopeA>(pos));
+		partvec.emplace_back(std::make_unique<SlopeA>(PosX));
 		break;
 	case Track_Parts::SLOPE_B:
+		partvec.emplace_back(std::make_unique<SlopeB>(PosX));
 		break;
 	case Track_Parts::SLOPE_C:
 		break;
@@ -95,6 +113,7 @@ void MapCtl::SetState(Track_Parts state, VECTOR2 pos)
 	case Track_Parts::SLOPE_H:
 		break;
 	case Track_Parts::AXCEL:
+		partvec.emplace_back(std::make_unique<Axcel>(PosX));
 		break;
 	case Track_Parts::FENCE:
 		break;
@@ -105,6 +124,10 @@ void MapCtl::SetState(Track_Parts state, VECTOR2 pos)
 	case Track_Parts::MISHMASH:
 		break;
 	case Track_Parts::SWAMP:
+		partvec.emplace_back(std::make_unique<Swamp>(PosX));
+		break;
+	case Track_Parts::FNISH:
+		partvec.emplace_back(std::make_unique<Finish>(PosX));
 		break;
 	case Track_Parts::MAX:
 		break;
@@ -119,8 +142,8 @@ MapCtl::MapCtl():RoadOffset(1009),Walloffset(1150)
 	roadPos = { BackDefPosX,RoadPosY };
 	WallPos = { BackDefPosX ,BackWallPosY };
 	roadPos2 = { roadPos.x + RoadOffset,RoadPosY };
-	SetState(Track_Parts::SLOPE_A, {200,380});
-	SetState(Track_Parts::SLOPE_A, { 2000,380 });
+	SetState(Track_Parts::FNISH, 500);
+	RecordTime = 0;
 }
 
 

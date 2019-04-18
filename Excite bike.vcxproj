@@ -131,8 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Axcel.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Finish.h" />
     <ClInclude Include="FontMng.h" />
     <ClInclude Include="FVECTOR2.h" />
     <ClInclude Include="GameScene.h" />
@@ -142,13 +144,17 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneTask.h" />
     <ClInclude Include="SlopeA.h" />
+    <ClInclude Include="SlopeB.h" />
+    <ClInclude Include="Swamp.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TrackPart.h" />
     <ClInclude Include="VECTOR2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Axcel.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Finish.cpp" />
     <ClCompile Include="FontMng.cpp" />
     <ClCompile Include="FVECTOR2.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -158,6 +164,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneTask.cpp" />
     <ClCompile Include="SlopeA.cpp" />
+    <ClCompile Include="SlopeB.cpp" />
+    <ClCompile Include="Swamp.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TrackPart.cpp" />
     <ClCompile Include="VECTOR2.cpp" />

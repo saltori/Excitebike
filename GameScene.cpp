@@ -29,8 +29,7 @@ void GameScene::Init(void)
 	camera->SetTarget(*player);
 	camera->SetPos(VECTOR2(400,200));
 	(*player)->SetAnim("Ž~");
-	
-	
+	lpSceneTask.StartPrgTime();
 }
 
 uniqueBase GameScene::Update(uniqueBase ub)

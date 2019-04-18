@@ -75,6 +75,18 @@
     <ClInclude Include="MapCtl.h">
       <Filter>ヘッダー ファイル\Mng</Filter>
     </ClInclude>
+    <ClInclude Include="SlopeB.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Axcel.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Swamp.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Finish.h">
+      <Filter>ヘッダー ファイル\TrackPart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +130,18 @@
     </ClCompile>
     <ClCompile Include="MapCtl.cpp">
       <Filter>ソース ファイル\Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="SlopeB.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Axcel.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Swamp.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish.cpp">
+      <Filter>ソース ファイル\TrackPart</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

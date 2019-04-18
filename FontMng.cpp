@@ -9,7 +9,6 @@ std::unique_ptr<FontMng, FontMng::FontMngDeleter> FontMng::s_Instance(new FontMn
 
 void FontMng::FontSet(std::string drawfont)
 {
-	std::string str;
 	DrawFontList.clear();
 	str = drawfont;
 	std::transform(str.begin(), str.end(), str.begin(), toupper);
@@ -48,6 +47,15 @@ void FontMng::FontDraw(VECTOR2 pos, VECTOR2 offset,bool Flashflag)
 			pos += offset;
 		}
 	}
+}
+
+void FontMng::FontDraw(std::string drawfont, VECTOR2 pos, VECTOR2 offset, bool Flashflag)
+{
+	if (str != drawfont)
+	{
+		FontSet(drawfont);
+	}
+	FontDraw(pos, offset, Flashflag);
 }
 
 FontMng::FontMng()

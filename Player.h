@@ -11,6 +11,8 @@ enum class PL_STATE {
 	RUN,		// 走行状態
 	JUMP,		// ｼﾞｬﾝﾌﾟ中
 	WHEELIE,	// ｳｨﾘｰ
+	NOSEMANUAL,	// 逆ｳｨﾘｰ
+	FINISH,		// ゴール
 	OVERHEAT,	// ｵｰﾊﾞｰﾋｰﾄ
 };
 
@@ -23,9 +25,6 @@ enum class ANIM_TBL {
 
 constexpr int PlayerDivSize		= 24;	// ﾌﾟﾚｲﾔｰのｻｲｽﾞ
 constexpr int PlayerDivCnt		= 6;	// ﾌﾟﾚｲﾔｰのｺﾏ数
-constexpr int PlayerChipOffsetX = 1;	// 描画ﾁｯﾌﾟのｵﾌｾｯﾄ
-constexpr int PlayerChipOffsetY = 0;	// 描画ﾁｯﾌﾟのｵﾌｾｯﾄ
-constexpr float GroundPos		= 200.0f;	// 地面か空中化の分岐点
 
 class Player
 {
@@ -37,17 +36,17 @@ public:
 	void Draw(void);
 	void SetMove(void);
 	const VECTOR2 &GetPos(void);
-	const int GetplayerSpeed(void);
 	bool SetAnim(std::string animName);
 	void AddanimCnt(int aniCnt);
 
 private:
 	FVECTOR2 pos;			// ﾌﾟﾚｲﾔｰの座標
+	FVECTOR2 v;				//　加速度
 	PL_STATE state;			// ﾌﾟﾚｲﾔｰの状態
 	ANIM_TBL animTbl;		// ｱﾆﾒｰｼｮﾝ
 	char key[256];
 	char keyOld[256];
-	int speed;				// ﾊﾞｲｸのｽﾋﾟｰﾄﾞ
+	float speed;				// ﾊﾞｲｸのｽﾋﾟｰﾄﾞ
 	std::string imageName;
 	VECTOR2 divSize;		//// 描画ﾁｯﾌﾟのｻｲｽﾞ
 	VECTOR2 divCnt;		// 描画ﾁｯﾌﾟ数（縦横）
@@ -62,5 +61,9 @@ private:
 	float OHValue;					// ｵｰﾊﾞｰﾋｰﾄ
 	int engineFlash;				// ｴﾝｼﾞﾝを点滅させる用
 	bool animCntAddflg;				// ｱﾆﾒｰｼｮﾝのﾙｰﾌﾟ用
+	const float Gravity;			// 重力
+	float JumpHeight;				// ｼﾞｬﾝﾌﾟの高さ]
+	float PlayerGround;				// ﾌﾟﾚｲﾔｰのいる地面の座標
+	void DebugDraw(void);
 };
 

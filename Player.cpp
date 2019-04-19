@@ -58,9 +58,13 @@ void Player::Draw(void)
 		Flash++;
 		if (Flash / 10 % 2)
 		{
-			DrawBox(engineBox.top, engineBox.left, engineBox.right + OHValue, engineBox.bottom, 0xFF0000, true);
+			DrawBox(engineBox.top, engineBox.left, engineBox.right + EngineLimiter, engineBox.bottom, 0xFF0000, true);
 		}
-
+		OHValue -=  0.3f;
+		if (OHValue < 0)
+		{
+			OHflag = false;
+		}
 	}
 	else 
 	{

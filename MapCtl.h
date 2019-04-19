@@ -10,6 +10,14 @@ using trackpart_vec = std::vector<trackpart_ptr>;
 
 #define lpMapCtl (MapCtl::GetInstance())
 
+struct RecordTime {
+	int BestTime;
+	int NowTime;
+	int Minutes;
+	int Second;
+	int Milli;
+};
+
 class MapCtl
 {
 public:
@@ -24,8 +32,12 @@ public:
 	char key[256];
 	void AddWallpos(FVECTOR2 vec);
 	void AddRoadpos(FVECTOR2 vec);
-	bool HitCheck(FVECTOR2 pos);
-	void HitEffect(float &speed, PL_STATE &state, float &OHValue);;
+	bool Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue);
+	void HitEffect(float &speed, PL_STATE &state, float &OHValue);
+	void SetGoalFlag(bool flg);
+	bool GetGoalFlag(void);
+	void StartTime(void);
+	RecordTime GetRecordTime(void);
 private:
 	const float RoadOffset;		// ìπÇÃµÃæØƒ
 	const float Walloffset;		// ï«ÇÃµÃæØƒ
@@ -34,6 +46,12 @@ private:
 	FVECTOR2 WallPos;			// ï«ÇÃç¿ïW
 	void SetState(Track_Parts state,int PosX);
 	trackpart_vec partvec;
+	bool GoalFlag;		// Ω√∞ºﬁ∏ÿ±
+	RecordTime recordTime;
+	void Measurement(void);		// éûä‘åvë™
+	void TimeCon(void);	// ï™ïbÇ…ïœä∑
+	bool TimeFlag;
+	void SetStage(void);
 	struct MapCtlDeleter
 	{
 		void operator()(MapCtl* mapCtl) const
@@ -45,6 +63,5 @@ private:
 	MapCtl();
 	~MapCtl();
 	static std::unique_ptr<MapCtl, MapCtlDeleter> s_Instance;
-	int RecordTime;
 };
 

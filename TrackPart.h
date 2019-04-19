@@ -32,7 +32,7 @@ public:
 	virtual square GetHitBox(void) = 0;
 	virtual void AddPartPos(int speed)=0;
 	virtual void Update(void) = 0;
-	virtual bool HitCheck(FVECTOR2 pos) = 0;
+	virtual bool Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue) = 0;
 	virtual void HitEffect(float &speed,PL_STATE &state,float &OHValue) = 0;
 private:
 	VECTOR2 pos;		//  ﬂ∞¬ÇÃç¿ïW

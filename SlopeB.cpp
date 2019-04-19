@@ -53,11 +53,12 @@ void SlopeB::Update(void)
 	Draw();
 }
 
-bool SlopeB::HitCheck(FVECTOR2 pos)
+bool SlopeB:: Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue)
 {
 	if (HitBox.top <= pos.x &&HitBox.right >= pos.x
 		&&HitBox.left <= pos.y &&HitBox.bottom >= pos.y)
 	{
+		HitEffect(speed, state, OHValue);
 		return true;
 	}
 	return false;

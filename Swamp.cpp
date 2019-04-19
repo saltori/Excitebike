@@ -55,13 +55,14 @@ void Swamp::Update(void)
 	Draw();
 }
 
-bool Swamp::HitCheck(FVECTOR2 pos)
+bool Swamp:: Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue)
 {
 	bool rtnFlag = false;
 	if (HitBox.top <= pos.x &&HitBox.right >= pos.x
  		&&HitBox.left <= pos.y &&HitBox.bottom >= pos.y)
 	{
 		rtnFlag = true;
+		HitEffect(speed, state, OHValue);
 	}
 	if (HitBox2.top >= pos.x &&HitBox2.right <= pos.x
 		&&HitBox2.left >= pos.y &&HitBox2.bottom <= pos.y)

@@ -13,7 +13,7 @@ public:
 	square GetHitBox(void);
 	void AddPartPos(int speed);
 	void Update(void);
-	bool HitCheck(FVECTOR2 pos);
+	bool Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue);
 	void HitEffect(float &speed, PL_STATE &state, float &OHValue);
 private:
 	VECTOR2 pos;		//  ﬂ∞¬ÇÃç¿ïW

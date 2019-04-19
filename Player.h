@@ -38,7 +38,7 @@ public:
 	const VECTOR2 &GetPos(void);
 	bool SetAnim(std::string animName);
 	void AddanimCnt(int aniCnt);
-
+	PL_STATE GetState(void);
 private:
 	FVECTOR2 pos;			// ﾌﾟﾚｲﾔｰの座標
 	FVECTOR2 v;				//　加速度
@@ -53,17 +53,18 @@ private:
 	VECTOR2 chipOffset; // 描画ﾁｯﾌﾟのイメージIDのｵﾌｾｯﾄ
 	std::map<std::string, int[static_cast<int>(ANIM_TBL::MAX)]> animTable;	// ｱﾆﾒｰｼｮﾝのﾃｰﾌﾞﾙ
 	std::string animName;	// 選択中のｱﾆﾒｰｼｮﾝ
-	unsigned int animCnt;
+	int animCnt;
 	bool AddAnim(std::string animName, int id_x, int id_y, int frame, int inv);
 	bool initAnim(void);
 	bool OHflag;					// ｵｰﾊﾞｰﾋｰﾄかどうかのﾌﾗｸﾞ
 	square engineBox;				// ｴﾝｼﾞﾝ
 	float OHValue;					// ｵｰﾊﾞｰﾋｰﾄ
-	int engineFlash;				// ｴﾝｼﾞﾝを点滅させる用
+	int Flash;				// ｴﾝｼﾞﾝを点滅させる用
 	bool animCntAddflg;				// ｱﾆﾒｰｼｮﾝのﾙｰﾌﾟ用
 	const float Gravity;			// 重力
 	float JumpHeight;				// ｼﾞｬﾝﾌﾟの高さ]
 	float PlayerGround;				// ﾌﾟﾚｲﾔｰのいる地面の座標
+	void Fall(void);				// 落下処理	
 	void DebugDraw(void);
 };
 

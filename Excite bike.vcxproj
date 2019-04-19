@@ -133,7 +133,6 @@
   <ItemGroup>
     <ClInclude Include="Axcel.h" />
     <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Finish.h" />
     <ClInclude Include="FontMng.h" />
     <ClInclude Include="FVECTOR2.h" />
@@ -142,6 +141,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="MapCtl.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SceneTask.h" />
     <ClInclude Include="SlopeA.h" />
     <ClInclude Include="SlopeB.h" />
@@ -153,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="Axcel.cpp" />
     <ClCompile Include="BaseScene.cpp" />
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Finish.cpp" />
     <ClCompile Include="FontMng.cpp" />
     <ClCompile Include="FVECTOR2.cpp" />
@@ -162,6 +161,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapCtl.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SceneTask.cpp" />
     <ClCompile Include="SlopeA.cpp" />
     <ClCompile Include="SlopeB.cpp" />

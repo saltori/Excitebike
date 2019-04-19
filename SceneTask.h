@@ -33,9 +33,6 @@ public:
 	}
 	void GameRun(void);	// この中でｹﾞｰﾑのﾙｰﾌﾟ
 	VECTOR2 GetScreenSize(void);
-	void StartPrgTime();	// 計測開始	
-	void EndPrgTime();		// 終了
-	__int64 GetPrgTime();	// 開始から終了
 private:
 	struct GameTaskDeleter // 関数ｵﾌﾞｼﾞｪｸﾄ
 	{

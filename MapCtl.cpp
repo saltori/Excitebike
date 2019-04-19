@@ -14,9 +14,10 @@ constexpr int ViewAreaCntY = 600;
 constexpr int GameAreaCntX = ViewAreaCntX * 5;
 constexpr int GameAreaCntY = 600;
 
-constexpr float BackDefPosX		= -10.0f;								// 背景(1枚目)のX座標
-constexpr float BackWallPosY	= -50.0f;								// 壁のY座標
-constexpr float RoadPosY		= 270.0f;								// 道のY座標
+constexpr float BackDefPosX		= -10.0f;	// 背景(1枚目)のX座標
+constexpr float BackWallPosY	= -50.0f;	// 壁のY座標
+constexpr float RoadPosY		= 270.0f;	// 道のY座標
+
 
 
 std::unique_ptr<MapCtl, MapCtl::MapCtlDeleter> MapCtl::s_Instance(new MapCtl());
@@ -33,6 +34,8 @@ VECTOR2 MapCtl::GetViewSize(void)
 
 void MapCtl::MapDraw(void)
 {
+
+
 	for (int i = 0; i < 10; i++)
 	{
 		DrawGraph(roadPos.x + RoadOffset * i, roadPos.y, IMAGE_ID("image/road.png")[0], true);
@@ -43,12 +46,6 @@ void MapCtl::MapDraw(void)
 	{
 		(**tmp).Update();
 	}
-	if (roadPos.x <= -10000)
-	{
-		RecordTime = lpSceneTask.GetPrgTime();
-		
-	}
-	DrawFormatString(20,70, 0x000000,"Time:%d", RecordTime);
 	DrawFormatString(20, 40, 0x000000, "roadPosX:%f", roadPos.x);
 
 	Update();
@@ -56,6 +53,8 @@ void MapCtl::MapDraw(void)
 
 void MapCtl::Update(void)
 {
+	Measurement();
+	TimeCon();
 }
 
 void MapCtl::AddWallpos(FVECTOR2 vec)
@@ -66,28 +65,48 @@ void MapCtl::AddWallpos(FVECTOR2 vec)
 void MapCtl::AddRoadpos(FVECTOR2 vec)
 {
 	roadPos -= vec;
-	for (auto tmp = partvec.begin(); tmp != partvec.end(); tmp++)
+	for (auto tmp = partvec.begin(); tmp != partvec.end(); ++tmp)
 	{
 		(**tmp).AddPartPos(-vec.x);
 	}
 }
 
-bool MapCtl::HitCheck(FVECTOR2 pos)
+bool MapCtl:: Collision(FVECTOR2 pos,float &speed,PL_STATE &state,float &OHValue)
 {
 	bool rtnFlag = false;
-	for (auto tmp = partvec.begin(); tmp != partvec.end(); tmp++)
+	for (auto tmp = partvec.begin(); tmp != partvec.end(); ++tmp)
 	{
-		rtnFlag = rtnFlag|(**tmp).HitCheck(pos);
+		rtnFlag = rtnFlag|(**tmp).Collision(pos, speed, state, OHValue);
 	}
 	return rtnFlag;
 }
 
 void MapCtl::HitEffect(float & speed, PL_STATE &state, float &OHValue)
 {
-	for (auto tmp = partvec.begin(); tmp != partvec.end(); tmp++)
+	for (auto tmp = partvec.begin(); tmp != partvec.end(); ++tmp)
 	{
 		(**tmp).HitEffect(speed,state,OHValue);
 	}
+}
+
+void MapCtl::SetGoalFlag(bool flg)
+{
+	GoalFlag = flg;
+}
+
+bool MapCtl::GetGoalFlag(void)
+{
+	return GoalFlag;
+}
+
+void MapCtl::StartTime(void)
+{
+	TimeFlag = true;
+}
+
+RecordTime MapCtl::GetRecordTime(void)
+{
+	return recordTime;
 }
 
 void MapCtl::SetState(Track_Parts state, int PosX)
@@ -136,14 +155,44 @@ void MapCtl::SetState(Track_Parts state, int PosX)
 	}
 }
 
+void MapCtl::Measurement(void)
+{
+	if (TimeFlag)
+	{
+		recordTime.Minutes++;
+	}
+}
+
+void MapCtl::TimeCon(void)
+{
+	recordTime.Second = (recordTime.Minutes % 3600) / 60;
+	recordTime.Minutes = recordTime.Minutes % 60;
+}
+
+void MapCtl::SetStage(void)
+{
+	SetState(Track_Parts::SLOPE_A,700);
+	SetState(Track_Parts::SLOPE_B, 1000);
+	SetState(Track_Parts::SWAMP, 1200);
+	SetState(Track_Parts::AXCEL, 1400);
+	SetState(Track_Parts::SLOPE_A, 1600);
+	SetState(Track_Parts::SLOPE_A, 1700);
+	SetState(Track_Parts::SLOPE_A, 1800);
+	SetState(Track_Parts::SLOPE_A, 1900);
+	SetState(Track_Parts::AXCEL, 2200);
+	SetState(Track_Parts::FNISH, 3000);
+
+}
+
 
 MapCtl::MapCtl():RoadOffset(1009),Walloffset(1150)
 {
 	roadPos = { BackDefPosX,RoadPosY };
 	WallPos = { BackDefPosX ,BackWallPosY };
 	roadPos2 = { roadPos.x + RoadOffset,RoadPosY };
-	SetState(Track_Parts::FNISH, 500);
-	RecordTime = 0;
+	SetStage();
+	GoalFlag = false;
+	TimeFlag = false;
 }
 
 

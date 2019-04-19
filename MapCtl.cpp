@@ -46,7 +46,7 @@ void MapCtl::MapDraw(void)
 	{
 		(**tmp).Update();
 	}
-	DrawFormatString(20, 40, 0x000000, "roadPosX:%f", roadPos.x);
+	//DrawFormatString(20, 40, 0x000000, "roadPosX:%f", roadPos.x);
 
 	Update();
 }

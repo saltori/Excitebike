@@ -27,7 +27,6 @@ void GameScene::Init(void)
 	(*player)->Init("image/rider.png", { PlayerDivSize,PlayerDivSize }, { PlayerDivCnt,PlayerDivCnt }, { 1,0});
 	FontMng::GetInstance().FontInit();
 	(*player)->SetAnim("Ž~");
-	lpSceneTask.StartPrgTime();
 	FlashBox = {0,0,lpSceneTask.GetScreenSize().x,lpSceneTask.GetScreenSize().y/4};
 }
 

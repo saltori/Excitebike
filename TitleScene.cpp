@@ -63,7 +63,7 @@ uniqueBase TitleScene::Update(uniqueBase ub)
 		}
 
 	}
-	if (key[KEY_INPUT_SPACE])
+	if (key[KEY_INPUT_SPACE] && !keyOld[KEY_INPUT_SPACE])
 	{
 		return std::make_unique<GameScene>();
 	}

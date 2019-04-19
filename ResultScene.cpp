@@ -3,6 +3,8 @@
 #include "ImageMng.h"
 #include "SceneTask.h"
 #include "FontMng.h"
+#include "TitleScene.h"
+
 constexpr int Backcolor  = 0x0000ff;	// îwåiêF
 ResultScene::ResultScene()
 {
@@ -29,6 +31,11 @@ uniqueBase ResultScene::Update(uniqueBase ub)
 	lpFontMng.FontDraw("BEST TIME", { 200,300 }, { 17,0 }, false);
 
 	ScreenFlip();
+
+	if (key[KEY_INPUT_SPACE] && !keyOld[KEY_INPUT_SPACE])
+	{
+		return std::make_unique<TitleScene>();
+	}
 
 	return ub;
 

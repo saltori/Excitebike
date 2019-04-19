@@ -172,15 +172,10 @@ void MapCtl::TimeCon(void)
 void MapCtl::SetStage(void)
 {
 	SetState(Track_Parts::SLOPE_A,700);
-	SetState(Track_Parts::SLOPE_B, 1000);
-	SetState(Track_Parts::SWAMP, 1200);
-	SetState(Track_Parts::AXCEL, 1400);
-	SetState(Track_Parts::SLOPE_A, 1600);
-	SetState(Track_Parts::SLOPE_A, 1700);
-	SetState(Track_Parts::SLOPE_A, 1800);
-	SetState(Track_Parts::SLOPE_A, 1900);
-	SetState(Track_Parts::AXCEL, 2200);
-	SetState(Track_Parts::FNISH, 3000);
+	SetState(Track_Parts::SLOPE_B, 2000);
+	SetState(Track_Parts::SWAMP, 3000);
+	SetState(Track_Parts::AXCEL, 5000);
+	SetState(Track_Parts::FNISH, 7000);
 
 }
 

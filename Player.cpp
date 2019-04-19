@@ -55,6 +55,7 @@ void Player::Draw(void)
 {
 	if (OHflag)
 	{
+		speed = 0;
 		Flash++;
 		if (Flash / 10 % 2)
 		{
@@ -65,6 +66,7 @@ void Player::Draw(void)
 		{
 			OHflag = false;
 		}
+		lpFontMng.FontDraw("OVER HEAT", { 330,200, }, { 18,0 }, true);
 	}
 	else 
 	{
@@ -93,7 +95,7 @@ void Player::SetMove(void)
 	GetHitKeyStateAll(key);
 	if(OHflag)
 	{
-		lpFontMng.FontDraw("OVER HEAT", { 330,200, }, { 18,0 }, true);
+		
 		if (key[KEY_INPUT_K])
 		{
 			OHValue = 0.0f;
